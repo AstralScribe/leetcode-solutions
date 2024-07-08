@@ -1,10 +1,15 @@
+from typing import Optional
+
+class ListNode:
+    ...
+
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
         total = ListNode(0)
         trav = total
         carry = 0
         
-        while l1 != None or l2 != None or carry != 0:
+        while l1 is not None or l2 is not None or carry != 0:
             
             if l1:
                 l1val = l1.val

@@ -7,23 +7,20 @@ class Solution:
         mapper = {}
         max_length = 0
 
-        for i in nums:
-            if i in mapper.keys():
+        for num in nums:
+            if num in mapper.keys():
                 continue
-            mapper[i] = [i,i]
-            left_end = mapper[i-1][0] if mapper.get(i-1, False) else False
-            right_end = mapper[i+1][1] if  mapper.get(i+1, False) else False
-            if left_end:
-                mapper[i][0] = left_end
-                mapper[i-1][1] = 
-            if right_end:
-                mapper[i][1] = right_end
-            print(mapper) 
-            max_length = max(max_length, mapper[i][1]-mapper[i][0]+1)
+            mapper[num] = 0
+            num_left = mapper.get(num-1, 0)
+            num_right = mapper.get(num+1, 0)
+            count = num_left+num_right+1
+            mapper[num-num_left] = count
+            mapper[num+num_right] = count
+            print(mapper)
+            max_length = max(max_length, count)
         
         return max_length
-
-
+    
 def run_test(nums):
     s = Solution()
     val = s.longestConsecutive(nums)

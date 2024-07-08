@@ -1,50 +1,50 @@
-from typing import List, Set
+from typing import List
 import time
 
 # Solution #1
-# class Solution:
-#     def isValidSudoku(self, board: List[List[str]]) -> bool:
-#         
-#         blocks = self.get_semiboard(board)
-#         columns = self.get_columns(board)
-#
-#         for i in range(9):
-#             cols = columns[i].replace(".","")
-#             rows = "".join(board[i]).replace(".","")
-#             block = "".join(blocks[i]).replace(".", "")
-#             
-#             if len(cols) != len(set(cols)):
-#                 return False
-#
-#             if len(rows) != len(set(rows)):
-#                 return False
-#
-#             if len(block) != len(set(block)):
-#                 return False
-#
-#         return True
-#
-#
-#     def get_semiboard(self, board):
-#         temp = []
-#         for i in range(3):
-#             for j in range(3):
-#                 t = []
-#                 for k in range(3):
-#                     t.extend(board[i*3:i*3+3][k][j*3:j*3+3])
-#                 temp.append(t)
-#         return temp
-#         
-#     def get_columns(self, board):
-#         temp = {}
-#         for i in board:
-#             for j in range(9):
-#                 temp[j] = temp.get(j, "") + i[j]
-#         return list(temp.values())
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        
+        blocks = self.get_semiboard(board)
+        columns = self.get_columns(board)
+
+        for i in range(9):
+            cols = columns[i].replace(".","")
+            rows = "".join(board[i]).replace(".","")
+            block = "".join(blocks[i]).replace(".", "")
+            
+            if len(cols) != len(set(cols)):
+                return False
+
+            if len(rows) != len(set(rows)):
+                return False
+
+            if len(block) != len(set(block)):
+                return False
+
+        return True
+
+
+    def get_semiboard(self, board):
+        temp = []
+        for i in range(3):
+            for j in range(3):
+                t = []
+                for k in range(3):
+                    t.extend(board[i*3:i*3+3][k][j*3:j*3+3])
+                temp.append(t)
+        return temp
+        
+    def get_columns(self, board):
+        temp = {}
+        for i in board:
+            for j in range(9):
+                temp[j] = temp.get(j, "") + i[j]
+        return list(temp.values())
 
 
 # Solution #2
-class Solution:
+class Solution2:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
         
         rows = {}
