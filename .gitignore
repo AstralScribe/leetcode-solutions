@@ -1,3 +1,4 @@
 .pytest_cache/
 .links
 __pycache__/
+.idea/
