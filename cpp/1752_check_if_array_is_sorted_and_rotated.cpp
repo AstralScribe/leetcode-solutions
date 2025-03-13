@@ -5,38 +5,29 @@ using namespace std;
 
 class Solution {
 public:
-  bool check(vector<int>& nums) {
-    if (checkSorted(nums, 0, nums.size())) return true;
-    int rotation = findRotation(nums); 
-    if (checkSorted(nums, 0, rotation) && checkSorted(nums, rotation + 1, nums.size()) && nums[0] >= nums[nums.size()-1]) {
-      return true;
-    }
-    return false;
-  }
-  
-  int findRotation(vector<int>& nums) {
-    int n = nums.size();
-    int min = 0;
-    for (int i = 0; i < n; i++) {
-      if (nums[i] <= nums[min]) {
-        min = i;
+  bool check(vector<int> &nums) {
+    auto array_size = nums.size();
+    int b_rotation_idx = 0;
+    bool b_rotation = false;
+    for (auto i = 0; i < array_size - 1; i++) {
+      if (nums[i] <= nums[i + 1] && !b_rotation)
+        continue;
+      if (!b_rotation) {
+        b_rotation = true;
+        if (nums[0] < nums[i + 1])
+          return false;
+        continue;
       }
-    }
-    return min;
-  }
-  
-  bool checkSorted(const vector<int>& nums, int left, int right) {
-    for (int i = left; i < right; i++) {
-      if (nums[i] < nums[i - 1]) {
-        return false;
-      }
+      if (nums[0] >= nums[i + 1] && nums[i] <= nums[i + 1])
+        continue;
+      return false;
     }
     return true;
   }
 };
 
 int main() {
-  vector<int> nums = {6,10,6};
+  vector<int> nums = {6, 10, 6};
   Solution s;
   cout << s.check(nums) << endl;
 }
